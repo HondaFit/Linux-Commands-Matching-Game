@@ -2,7 +2,6 @@
 
 int main()
 {
-
-
-return 0;
+    cout << "testing" << endl;
+    return 0;
 }
