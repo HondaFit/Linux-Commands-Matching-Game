@@ -88,7 +88,6 @@ public:
         node *pTemp;
         string command = "\0"; // take the entire line which will then be used to find the command and description
         string description =  "\0";
-
         listFile.open("comList.csv", ios::in);
         while (!listFile.eof())
         {
@@ -103,6 +102,7 @@ public:
 
 private:
     ifstream listFile;
+    
 
     node *pHead;
 };
