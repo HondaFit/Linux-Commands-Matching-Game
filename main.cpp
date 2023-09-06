@@ -1,8 +1,9 @@
-#include "functions.cpp"
+#include "header.hpp"
 
 int main()
 {
-    cout << "testing" << endl;
-    cout <<"testing 2"<<endl;
+
+    list linkedList;
+
     return 0;
 }

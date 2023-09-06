@@ -20,13 +20,13 @@ using std::endl;
 using std::fstream;
 using std::getline;
 using std::ifstream;
+using std::ios;
 using std::localtime;
 using std::ofstream;
 using std::put_time;
 using std::string;
 using std::toupper;
 using std::vector;
-using std::ios;
 
 using std::stoi;
 
@@ -86,26 +86,23 @@ public:
     list()
     {
         node *pTemp;
-        string command = '\0'; //take the entire line which will then be used to find the command and description
-        string description = '\0';
+        string command = "\0"; // take the entire line which will then be used to find the command and description
+        string description =  "\0";
 
-        listFile.open("comList.csv",ios::in);
-        while(!listFile.eof())
+        listFile.open("comList.csv", ios::in);
+        while (!listFile.eof())
         {
             pTemp = new node;
-            getline(listFile,command,',');
-            getline(listFile,description,'\n');
-            pTemp->setComDesc(command,description);
-
-            
-
-
+            getline(listFile, command, ',');
+            getline(listFile, description, '\n');
+            cout << command << endl;
+            cout << description << endl;
+            pTemp->setComDesc(command, description);
         }
     }
 
 private:
-ifstream listFile;
+    ifstream listFile;
 
-node *pHead;
-
+    node *pHead;
 };
