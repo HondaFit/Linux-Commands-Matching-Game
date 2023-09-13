@@ -53,7 +53,7 @@ public:
     {
         pNext = next;
     }
-    node *getNode() // getting the address of the next node
+    node *getNext() // getting the address of the next node
     {
         return pNext;
     }
@@ -87,7 +87,7 @@ public:
     {
         node *pTemp;
         string command = "\0"; // take the entire line which will then be used to find the command and description
-        string description =  "\0";
+        string description = "\0";
         listFile.open("comList.csv", ios::in);
         while (!listFile.eof())
         {
@@ -97,12 +97,28 @@ public:
             cout << command << endl;
             cout << description << endl;
             pTemp->setComDesc(command, description);
+
+            if(pHead == NULL) // is the list empty?
+            {
+                pHead = pTemp;
+                pCurrent = pHead;
+            }
+            else
+            {
+                pCurrent->setNext(pTemp);
+                pCurrent = pTemp;
+               
+            }
         }
     }
 
+    
 private:
     ifstream listFile;
-    
 
-    node *pHead;
+    node *pHead = NULL;
+    node *pCurrent = NULL;
 };
+
+
+

@@ -5,5 +5,6 @@ int main()
 
     list linkedList;
 
+    cout << "done" << endl;
     return 0;
 }

@@ -18,7 +18,7 @@
 
         "args": [],
 
-        "stopAtEntry": true,
+        "stopAtEntry": true, // false for running program. true for debugging
 
         "cwd": "${workspaceFolder}",
 

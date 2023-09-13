@@ -1,2 +1,30 @@
-ls,list what in the current directory
-pwd,show directory path
+pwd,print working directory
+ls,list files and directories
+cd,change directory
+mkdir,create a new directory
+rmdir,remove an empty directory
+rm, remove files or directories
+cp,copy files and directories
+mv,move or rename files and directories
+ssh,Secure Shell for remote access
+scp,securely copy files over SSH
+man,display manual pages
+g++,GNU C++ compiler
+gcc,GNU C compiler
+make,build software projects
+ps,display process status
+kill,terminate processes
+top,monitor system processes
+who,show logged-in users
+chmod,change file permissions
+cat,display file content
+alias,create command aliases
+chown,change file ownership
+df,display disk space usage
+grep,search text using patterns
+echo,display text
+exit,close the terminal session
+clear,clear the terminal screen
+find,search for files and directories
+finger,display user information
+free,display memory usage
