@@ -3,7 +3,7 @@
 int main()
 {
 
-    list linkedList;
+    list<string,string> linkedList;
     linkedList.readList();
 
     linkedList.game();

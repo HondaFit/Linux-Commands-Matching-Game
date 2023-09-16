@@ -17,4 +17,5 @@ build/pa1
 5) git diff "file name"     : will show changes only in the files
 6) git diff --name-only     : will show only files names that have been changed (not the content)
 
-7)
+7) git tag "Name (version)" -m "message"    : git tag V0.2 -m "pre template"
+8) git push origin main --tags      : make sure no changes are done before pushing it

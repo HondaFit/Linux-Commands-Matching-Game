@@ -31,6 +31,7 @@ using std::vector;
 
 using std::stoi;
 
+template<typename T1, typename T2>
 class node
 {
 public:
@@ -75,21 +76,21 @@ public:
     }
 
 private:
-    string command;
-    string description;
+    T1 command;
+    T2 description;
 
     node *pNext;
 };
 
 
-// T1 is number  & T2 
-//template <typename T1, typename T2>
+
+template<typename T1, typename T2>
 class list
 {
 public:
     list()
     {
-        node *pTemp;
+        node<T1,T2> *pTemp;
         string command = "\0"; // take the entire line which will then be used to find the command and description
         string description = "\0";
         listFile.open("comList.csv", ios::in);
@@ -112,7 +113,7 @@ public:
                 pCurrent->setNext(pTemp);
                 pCurrent = pTemp;
             }*/
-            pTemp = new node;
+            pTemp = new node<T1,T2>;
             getline(listFile, command, ',');
             getline(listFile, description, '\n');
 
@@ -135,7 +136,7 @@ public:
 
    void readList()
    {
-    node *pCurrent =pHead;
+    node<T1,T2> *pCurrent =pHead;
     while(pCurrent != NULL)
     {
         cout << pCurrent->getCom()<<","<<pCurrent->getDesc()<<endl;
@@ -190,8 +191,8 @@ private:
 
     vector<int> profiles;
 
-    node *pHead = NULL;
-    node *pCurrent = NULL;
+    node<T1,T2> *pHead = NULL;
+    node<T1,T2> *pCurrent = NULL;
 
      int menuSelection()
     {
