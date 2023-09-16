@@ -4,9 +4,10 @@ int main()
 {
 
     list<string,string> linkedList;
-    linkedList.readList();
 
-    linkedList.game();
+    //linkedList.readList(); //used for viewing linked list
+
+    linkedList.menu();
     
     cout << "done" << endl;
     cout << "hello world"<<endl;

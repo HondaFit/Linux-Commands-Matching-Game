@@ -1,4 +1,5 @@
 ------- Welcome to the Matching Linux Commands Game! -------
+
 ---- Here are some rules ----
 Each level you will be given a linux command and a list of command descriptions 
 Your goal is to trying math the linux command to the corresponding description
@@ -12,4 +13,3 @@ This means that you and other users can play this game!!
 
 If you want to add new linux commands along with linux descriptions, then you could do so
 You can also view all the commands along with the descriptions in the csv file 
-

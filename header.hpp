@@ -31,7 +31,7 @@ using std::vector;
 
 using std::stoi;
 
-template<typename T1, typename T2>
+template <typename T1, typename T2>
 class node
 {
 public:
@@ -82,103 +82,62 @@ private:
     node *pNext;
 };
 
-
-
-template<typename T1, typename T2>
+template <typename T1, typename T2>
 class list
 {
 public:
     list()
     {
-        node<T1,T2> *pTemp;
-        string command = "\0"; // take the entire line which will then be used to find the command and description
-        string description = "\0";
-        listFile.open("comList.csv", ios::in);
-        while (!listFile.eof())
+        loadCommands();
+        loadProfiles();
+    }
+
+    void readList()
+    {
+        node<T1, T2> *pCurrent = pHead;
+        while (pCurrent != NULL)
         {
-            /*pTemp = new node;
-            getline(listFile, command, ',');
-            getline(listFile, description, '\n');
-            //cout << command << endl;
-            //cout << description << endl;
-            pTemp->setComDesc(command, description);
-
-            if (pHead == NULL) // is the list empty?
-            {
-                pHead = pTemp;
-                pCurrent = pHead;
-            }
-            else
-            {
-                pCurrent->setNext(pTemp);
-                pCurrent = pTemp;
-            }*/
-            pTemp = new node<T1,T2>;
-            getline(listFile, command, ',');
-            getline(listFile, description, '\n');
-
-            pTemp->setComDesc(command, description); //assigning command and desciption to the new node
-
-            if(pHead != NULL) // If head is not empty 
-            {
-                pTemp->setNext(pHead);
-                pHead = pTemp;
-            }
-            else // if head is empty 
-            {
-            pHead = pTemp;
-
-            }
-        
-        
+            cout << pCurrent->getCom() << "," << pCurrent->getDesc() << endl;
+            pCurrent = pCurrent->getNext();
         }
     }
 
-   void readList()
-   {
-    node<T1,T2> *pCurrent =pHead;
-    while(pCurrent != NULL)
-    {
-        cout << pCurrent->getCom()<<","<<pCurrent->getDesc()<<endl;
-        pCurrent = pCurrent->getNext();
-    }
-   }
-
-    void game()
+    void menu()
     {
         int exit = false;
         while (exit == false)
         {
-           
+
             switch (menuSelection())
             {
             case 1:
-                //system("CLS");
+                system("clear");
                 cout << "Selected Game Rules" << endl;
+                displayRules();
                 break;
 
             case 2:
-                //system("CLS");
+                system("clear");
                 cout << "Selected Play Game" << endl;
                 break;
 
             case 3:
-                //system("CLS");
+                system("clear");
                 cout << "Selected Load Previous Game" << endl;
                 break;
 
             case 4:
-                //system("CLS");
+                system("clear");
                 cout << "Selected Add Command" << endl;
                 break;
 
             case 5:
-                //system("CLS");
+                system("clear");
                 cout << "Selected Remove Command" << endl;
                 break;
 
             case 6:
-                //system("CLS");
+                system("clear");
                 cout << "Selected Exit Game" << endl;
                 exit = true;
                 break;
@@ -188,13 +147,16 @@ public:
 
 private:
     ifstream listFile;
+    ifstream playerFile;
+    ifstream ruleFile;
 
     vector<int> profiles;
+    int currentProfile;
 
-    node<T1,T2> *pHead = NULL;
-    node<T1,T2> *pCurrent = NULL;
+    node<T1, T2> *pHead = NULL;
+    node<T1, T2> *pCurrent = NULL;
 
-     int menuSelection()
+    int menuSelection()
     {
         char dummy;
         int correctInput = false;
@@ -225,6 +187,58 @@ private:
         return stoi(choice);
     }
 
+    void loadCommands()
+    {
+        node<T1, T2> *pTemp;
+        string command = "\0"; // take the entire line which will then be used to find the command and description
+        string description = "\0";
+        listFile.open("comList.csv", ios::in);
+        while (!listFile.eof())
+        {
+            pTemp = new node<T1, T2>;
+            getline(listFile, command, ',');
+            getline(listFile, description, '\n');
 
+            pTemp->setComDesc(command, description); // assigning command and desciption to the new node
 
+            if (pHead != NULL) // If head is not empty
+            {
+                pTemp->setNext(pHead);
+                pHead = pTemp;
+            }
+            else // if head is empty
+            {
+                pHead = pTemp;
+            }
+        }
+        listFile.close();
+    }
+
+    void loadProfiles()
+    {
+        int currentProfile = 0;
+        playerFile.open("profiles.csv", ios::in);
+        while (!playerFile.eof())
+        {
+            playerFile >> currentProfile;
+            profiles.push_back(currentProfile);
+        }
+        playerFile.close();
+    }
+
+    void displayRules()
+    {
+        string line;
+        char dummy;
+        ruleFile.open("rules.txt", ios::in);
+        while (!ruleFile.eof())
+        {
+            getline(ruleFile, line);
+            cout << line << endl;
+        }
+        ruleFile.close();
+        cout << "\npress any key to continue: ";
+        cin >> dummy;
+        system("clear");
+    }
 };
