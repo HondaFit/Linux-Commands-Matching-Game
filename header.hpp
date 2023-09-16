@@ -81,6 +81,9 @@ private:
     node *pNext;
 };
 
+
+// T1 is number  & T2 
+//template <typename T1, typename T2>
 class list
 {
 public:
@@ -92,7 +95,7 @@ public:
         listFile.open("comList.csv", ios::in);
         while (!listFile.eof())
         {
-            pTemp = new node;
+            /*pTemp = new node;
             getline(listFile, command, ',');
             getline(listFile, description, '\n');
             //cout << command << endl;
@@ -108,40 +111,37 @@ public:
             {
                 pCurrent->setNext(pTemp);
                 pCurrent = pTemp;
+            }*/
+            pTemp = new node;
+            getline(listFile, command, ',');
+            getline(listFile, description, '\n');
+
+            pTemp->setComDesc(command, description); //assigning command and desciption to the new node
+
+            if(pHead != NULL) // If head is not empty 
+            {
+                pTemp->setNext(pHead);
+                pHead = pTemp;
             }
+            else // if head is empty 
+            {
+            pHead = pTemp;
+
+            }
+        
+        
         }
     }
 
-    int menuSelection()
+   void readList()
+   {
+    node *pCurrent =pHead;
+    while(pCurrent != NULL)
     {
-        char dummy;
-        int correctInput = false;
-        string choice;
-        while (correctInput != true)
-        {
-            cout << "Please select an option listed below:" << endl;
-            cout << "1) Game Rules" << endl;
-            cout << "2) Play Game" << endl;
-            cout << "3) Load Previuos Game" << endl;
-            cout << "4) Add Command" << endl;
-            cout << "5) Remove Command" << endl;
-            cout << "6) Exit" << endl;
-            cin >> choice;
-
-            if (choice != "1" && choice != "2" && choice != "3" && choice != "4" && choice != "5" && choice != "6")
-            {
-                cout << "incorrect input try again" << endl;
-                cout << "Press any key to continue" << endl;
-                cin >> dummy;
-                system("clear");
-            }
-            else
-            {
-                correctInput = true;
-            }
-        }
-        return stoi(choice);
+        cout << pCurrent->getCom()<<","<<pCurrent->getDesc()<<endl;
+        pCurrent = pCurrent->getNext();
     }
+   }
 
     void game()
     {
@@ -192,4 +192,38 @@ private:
 
     node *pHead = NULL;
     node *pCurrent = NULL;
+
+     int menuSelection()
+    {
+        char dummy;
+        int correctInput = false;
+        string choice;
+        while (correctInput != true)
+        {
+            cout << "Please select an option listed below:" << endl;
+            cout << "1) Game Rules" << endl;
+            cout << "2) Play Game" << endl;
+            cout << "3) Load Previuos Game" << endl;
+            cout << "4) Add Command" << endl;
+            cout << "5) Remove Command" << endl;
+            cout << "6) Exit" << endl;
+            cin >> choice;
+
+            if (choice != "1" && choice != "2" && choice != "3" && choice != "4" && choice != "5" && choice != "6")
+            {
+                cout << "incorrect input try again" << endl;
+                cout << "Press any key to continue" << endl;
+                cin >> dummy;
+                system("clear");
+            }
+            else
+            {
+                correctInput = true;
+            }
+        }
+        return stoi(choice);
+    }
+
+
+
 };

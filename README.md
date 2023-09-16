@@ -16,3 +16,5 @@ build/pa1
 4) git diff     :   will show the changes made in all files
 5) git diff "file name"     : will show changes only in the files
 6) git diff --name-only     : will show only files names that have been changed (not the content)
+
+7)

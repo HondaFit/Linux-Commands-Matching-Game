@@ -4,6 +4,7 @@ int main()
 {
 
     list linkedList;
+    linkedList.readList();
 
     linkedList.game();
     
