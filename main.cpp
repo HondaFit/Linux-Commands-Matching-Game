@@ -8,5 +8,6 @@ int main()
     linkedList.game();
     
     cout << "done" << endl;
+    cout << "hello world"<<endl;
     return 0;
 }
