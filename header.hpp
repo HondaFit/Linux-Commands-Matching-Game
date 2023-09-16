@@ -8,6 +8,7 @@
 #include <fstream>
 #include <cstdlib>
 #include <ctime>
+#include <cmath>
 #include <string>
 #include <vector>
 #include <chrono>
@@ -94,8 +95,8 @@ public:
             pTemp = new node;
             getline(listFile, command, ',');
             getline(listFile, description, '\n');
-            cout << command << endl;
-            cout << description << endl;
+            //cout << command << endl;
+            //cout << description << endl;
             pTemp->setComDesc(command, description);
 
             if (pHead == NULL) // is the list empty?
@@ -114,8 +115,8 @@ public:
     int menuSelection()
     {
         char dummy;
-        int choice;
         int correctInput = false;
+        int choice;
         while (correctInput != true)
         {
             cout << "Please select an option listed below:" << endl;
@@ -125,14 +126,14 @@ public:
             cout << "4) Add Command" << endl;
             cout << "5) Remove Command" << endl;
             cout << "6) Exit" << endl;
-            cin >> choice;
+             cin >> choice;
 
             if (choice != 1 && choice != 2 && choice != 3 && choice != 4 && choice != 5 && choice != 6)
             {
-            cout << "incorrect input try again"<<endl;
-            cout <<"Press any key to continue"<<endl;
-            cin >> dummy;
-           system("clear");
+                cout << "incorrect input try again" << endl;
+                cout << "Press any key to continue" << endl;
+                cin >> dummy;
+                system("clear");
             }
             else
             {
@@ -142,11 +143,48 @@ public:
         return choice;
     }
 
-    void menu()
+    void game()
     {
+        int exit = false;
+        while (exit == false)
+        {
+           
+            switch (menuSelection())
+            {
+            case 1:
+                //system("CLS");
+                cout << "Selected Game Rules" << endl;
+                break;
 
+            case 2:
+                //system("CLS");
+                cout << "Selected Play Game" << endl;
+                break;
+
+            case 3:
+                //system("CLS");
+                cout << "Selected Load Previous Game" << endl;
+                break;
+
+            case 4:
+                //system("CLS");
+                cout << "Selected Add Command" << endl;
+                break;
+
+            case 5:
+                //system("CLS");
+                cout << "Selected Remove Command" << endl;
+                break;
+
+            case 6:
+                //system("CLS");
+                cout << "Selected Exit Game" << endl;
+                exit = true;
+                break;
+            }
+        }
     }
-    
+
 private:
     ifstream listFile;
 

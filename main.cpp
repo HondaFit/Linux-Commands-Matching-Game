@@ -5,7 +5,8 @@ int main()
 
     list linkedList;
 
-linkedList.menue();
+    linkedList.game();
+    
     cout << "done" << endl;
     return 0;
 }
