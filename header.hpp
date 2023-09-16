@@ -14,6 +14,7 @@
 #include <chrono>
 #include <algorithm>
 #include <iomanip>
+#include <cctype>
 
 using std::cin;
 using std::cout; // we can now use cout without explicitly writing std::cout
@@ -124,6 +125,7 @@ public:
             case 3:
                 system("clear");
                 cout << "Selected Load Previous Game" << endl;
+                selectProfile();
                 break;
 
             case 4:
@@ -151,10 +153,48 @@ private:
     ifstream ruleFile;
 
     vector<int> profiles;
-    int currentProfile;
+    int currentProfile; // does not give score but index of the vector profiles indicating who is curretnly playing
 
     node<T1, T2> *pHead = NULL;
     node<T1, T2> *pCurrent = NULL;
+
+    void loadCommands()
+    {
+        node<T1, T2> *pTemp;
+        string command = "\0"; // take the entire line which will then be used to find the command and description
+        string description = "\0";
+        listFile.open("comList.csv", ios::in);
+        while (!listFile.eof())
+        {
+            pTemp = new node<T1, T2>;
+            getline(listFile, command, ',');
+            getline(listFile, description, '\n');
+
+            pTemp->setComDesc(command, description); // assigning command and desciption to the new node
+
+            if (pHead != NULL) // If head is not empty
+            {
+                pTemp->setNext(pHead);
+                pHead = pTemp;
+            }
+            else // if head is empty
+            {
+                pHead = pTemp;
+            }
+        }
+        listFile.close();
+    }
+    void loadProfiles()
+    {
+        int currentProfile = 0;
+        playerFile.open("profiles.csv", ios::in);
+        while (!playerFile.eof())
+        {
+            playerFile >> currentProfile;
+            profiles.push_back(currentProfile);
+        }
+        playerFile.close();
+    }
 
     int menuSelection()
     {
@@ -187,45 +227,6 @@ private:
         return stoi(choice);
     }
 
-    void loadCommands()
-    {
-        node<T1, T2> *pTemp;
-        string command = "\0"; // take the entire line which will then be used to find the command and description
-        string description = "\0";
-        listFile.open("comList.csv", ios::in);
-        while (!listFile.eof())
-        {
-            pTemp = new node<T1, T2>;
-            getline(listFile, command, ',');
-            getline(listFile, description, '\n');
-
-            pTemp->setComDesc(command, description); // assigning command and desciption to the new node
-
-            if (pHead != NULL) // If head is not empty
-            {
-                pTemp->setNext(pHead);
-                pHead = pTemp;
-            }
-            else // if head is empty
-            {
-                pHead = pTemp;
-            }
-        }
-        listFile.close();
-    }
-
-    void loadProfiles()
-    {
-        int currentProfile = 0;
-        playerFile.open("profiles.csv", ios::in);
-        while (!playerFile.eof())
-        {
-            playerFile >> currentProfile;
-            profiles.push_back(currentProfile);
-        }
-        playerFile.close();
-    }
-
     void displayRules()
     {
         string line;
@@ -240,5 +241,66 @@ private:
         cout << "\npress any key to continue: ";
         cin >> dummy;
         system("clear");
+    }
+
+    void selectProfile()
+    {
+        string userInput;
+        int exit = false;
+        char dummy;
+
+        while (exit == false)
+        {
+            int profileIndex = profiles.size(); // shows how many players are there
+            for (int i = 1; i <= profileIndex; i++)
+            {
+                cout << "Player " << i << "    Score: " << profiles[i - 1] << endl;
+            }
+
+            cout << "Select a Player by their Number: ";
+            cin >> userInput;
+
+            if (digitChecker(userInput) == true)
+            {
+                if (stoi(userInput) >= 1 && stoi(userInput) <= profileIndex)
+                {
+                    exit = true;
+                }
+                else
+                {
+                    cout << "\nInvalid Selection, Press any key to continue ";
+                    cin >> dummy;
+                    system("clear");
+                }
+            }
+            else
+            {
+                cout << "\nInvalid Selection, Press any key to continue ";
+                cin >> dummy;
+                system("clear");
+            }
+        }
+        currentProfile = stoi(userInput) - 1;
+        system("clear");
+    }
+
+    bool digitChecker(string userInput) //checkin gif user typed in anything other than numbers
+    {
+        bool isAlpha = false;
+        for (long unsigned int i = 0; i < userInput.length(); i++)
+        {
+            if (isalpha(userInput[i]))
+            {
+                isAlpha = true;
+            }
+        }
+        if (isAlpha == true)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 };
