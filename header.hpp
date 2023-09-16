@@ -116,7 +116,7 @@ public:
     {
         char dummy;
         int correctInput = false;
-        int choice;
+        string choice;
         while (correctInput != true)
         {
             cout << "Please select an option listed below:" << endl;
@@ -126,9 +126,9 @@ public:
             cout << "4) Add Command" << endl;
             cout << "5) Remove Command" << endl;
             cout << "6) Exit" << endl;
-             cin >> choice;
+            cin >> choice;
 
-            if (choice != 1 && choice != 2 && choice != 3 && choice != 4 && choice != 5 && choice != 6)
+            if (choice != "1" && choice != "2" && choice != "3" && choice != "4" && choice != "5" && choice != "6")
             {
                 cout << "incorrect input try again" << endl;
                 cout << "Press any key to continue" << endl;
@@ -140,7 +140,7 @@ public:
                 correctInput = true;
             }
         }
-        return choice;
+        return stoi(choice);
     }
 
     void game()
