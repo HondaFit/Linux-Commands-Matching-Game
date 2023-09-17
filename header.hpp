@@ -175,22 +175,31 @@ public:
         bool exit = false;
         int randCommand = 0;
         char dummy;
-        while (profiles[currentProfile - 1] <= 30 || exit == false)
+
+        int selection;
+        while (profiles[currentProfile - 1] <= 30 && exit == false)
         {
             randCommand = generateRandomNumber(totalCount);
             // cout << randCommand << endl;
             comFinder(randCommand);
             problemMaker(randCommand);
-            if (answerQuestion() == true)
+
+            selection = answerQuestion();
+            if (selection == 3)
+            {
+                exit = true;
+                cout << "You chose to exit game\n" << endl;
+            }
+            else if (selection == true)
             {
                 cout << "\nCorrect, You got the Answer Correct! You get a Point!" << endl;
                 profiles[currentProfile - 1]++;
             }
             else
-            {
-                cout << "\nIncorrect, You got the Answer Wrong. Minus 1 Point" << endl;
-                profiles[currentProfile - 1]--;
-            }
+                {
+                    cout << "\nIncorrect, You got the Answer Wrong. Minus 1 Point" << endl;
+                    profiles[currentProfile - 1]--;
+                }
             cout << "Press any key to continue" << endl;
             cin >> dummy;
             system("clear");
@@ -340,7 +349,7 @@ private:
                 system("clear");
             }
         }
-        currentProfile = stoi(userInput) - 1;
+        currentProfile = stoi(userInput);
         system("clear");
     }
 
@@ -505,11 +514,11 @@ private:
         {
             pCurrent = pCurrent->getNext();
         }
-        
-        if(pCurrent != NULL)
+
+        if (pCurrent != NULL)
         {
-    correctCommand = pCurrent->getCom();
-        correctDescription = pCurrent->getDesc();
+            correctCommand = pCurrent->getCom();
+            correctDescription = pCurrent->getDesc();
         }
         else
         {
@@ -528,13 +537,13 @@ private:
             pCurrent = pCurrent->getNext();
         }
 
-        if(pCurrent !=NULL)
+        if (pCurrent != NULL)
         {
-        return pCurrent->getDesc();
+            return pCurrent->getDesc();
         }
         else
         {
-            cout << "descFinder pCurrent is NULL   " <<desc << endl;
+            cout << "descFinder pCurrent is NULL   " << desc << endl;
             return NULL;
         }
     }
@@ -577,7 +586,7 @@ private:
             cout << i + 1 << ") " << possibleAnswer[i] << endl;
         }
     }
-    bool answerQuestion()
+    int answerQuestion()
     {
         char dummy;
         string userInput;
@@ -588,12 +597,13 @@ private:
             cout << "Current Points for Player " << currentProfile << ": " << profiles[currentProfile - 1] << endl;
             cout << "Problem: What is the Description that best fits the Command: " << correctCommand << endl;
             problemPrinter();
+            cout << "5) Exit to Menu" << endl;
             cout << "\nSelect your Description ";
             cin >> userInput;
 
             if (digitChecker(userInput) == true)
             {
-                if (stoi(userInput) >= 1 && stoi(userInput) <= 4)
+                if (stoi(userInput) >= 1 && stoi(userInput) <= 5)
                 {
                     exit = true;
                 }
@@ -614,24 +624,39 @@ private:
 
         int selection = stoi(userInput);
 
-        node<T1, T2> *pCurrent = pHead;
-        while (pCurrent != NULL && pCurrent->getDesc() != possibleAnswer[selection - 1])
+        if (selection != 5)
         {
-            pCurrent = pCurrent->getNext();
-        }
-        if (pCurrent != NULL && pCurrent->getDesc() == correctDescription)
-        {
-            possibleAnswer.clear();
-            correctCommand.clear();
-            correctDescription.clear();
-            return true;
+            node<T1, T2> *pCurrent = pHead;
+            while (pCurrent != NULL && pCurrent->getDesc() != possibleAnswer[selection - 1])
+            {
+                pCurrent = pCurrent->getNext();
+            }
+            if (pCurrent != NULL && pCurrent->getDesc() == correctDescription)
+            {
+                possibleAnswer.clear();
+                correctCommand.clear();
+                correctDescription.clear();
+                return true;
+            }
+            else
+            {
+                possibleAnswer.clear();
+                correctCommand.clear();
+                correctDescription.clear();
+                return false;
+            }
         }
         else
         {
             possibleAnswer.clear();
             correctCommand.clear();
             correctDescription.clear();
-            return false;
+            return 3;
         }
+    }
+
+    void exit()
+    {
+    
     }
 };
