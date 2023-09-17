@@ -92,7 +92,7 @@ public:
     list()
     {
         loadCommands();
-        loadProfiles();
+        loadProfiles2();
         totalCount = countList();
         // system("clear");
     }
@@ -189,7 +189,8 @@ public:
             if (selection == 3)
             {
                 exit = true;
-                cout << "You chose to exit game\n" << endl;
+                cout << "You chose to exit game\n"
+                     << endl;
             }
             else if (selection == true)
             {
@@ -197,10 +198,10 @@ public:
                 profiles[currentProfile - 1]++;
             }
             else
-                {
-                    cout << "\nIncorrect, You got the Answer Wrong. Minus 1 Point" << endl;
-                    profiles[currentProfile - 1]--;
-                }
+            {
+                cout << "\nIncorrect, You got the Answer Wrong. Minus 1 Point" << endl;
+                profiles[currentProfile - 1]--;
+            }
             cout << "Press any key to continue" << endl;
             cin >> dummy;
             system("clear");
@@ -217,6 +218,7 @@ private:
     ifstream playerFile;
     ifstream ruleFile;
 
+    vector<string> profileNames;
     vector<int> profiles;
     int currentProfile = 1; // does not give score but index of the vector profiles indicating who is curretnly playing
 
@@ -262,6 +264,24 @@ private:
         {
             playerFile >> currentProfile;
             profiles.push_back(currentProfile);
+        }
+        playerFile.close();
+    }
+
+    void loadProfiles2()
+    {
+        string name;
+        string points;
+        playerFile.open("profiles.csv", ios::in);
+
+        while (!playerFile.eof())
+        {
+
+            getline(playerFile, name, ',');
+            getline(playerFile, points, '\n');
+
+            profileNames.push_back(name);
+            profiles.push_back(stoi(points));
         }
         playerFile.close();
     }
@@ -595,7 +615,7 @@ private:
 
         while (exit == false)
         {
-            cout << "Current Points for Player " << currentProfile << ": " << profiles[currentProfile - 1] << endl;
+            cout << "Current Points for Player " << profileNames[currentProfile - 1] << ": " << profiles[currentProfile - 1] << endl;
             cout << "Problem: What is the Description that best fits the Command: " << correctCommand << endl;
             problemPrinter();
             cout << "5) Exit to Menu" << endl;
@@ -660,12 +680,12 @@ private:
     {
         node<T1, T2> *pCurrent = pHead;
         ofstream saveFile("comList.csv");
-        if(saveFile.is_open())
+        if (saveFile.is_open())
         {
-            while(pCurrent->getNext()->getNext() != NULL)
+            while (pCurrent->getNext()->getNext() != NULL)
             {
-            saveFile << pCurrent->getCom() << "," << pCurrent->getDesc() << endl;
-            pCurrent = pCurrent->getNext();
+                saveFile << pCurrent->getCom() << "," << pCurrent->getDesc() << endl;
+                pCurrent = pCurrent->getNext();
             }
             saveFile << pCurrent->getCom() << "," << pCurrent->getDesc();
         }
@@ -675,5 +695,18 @@ private:
         }
         saveFile.close();
 
+        ofstream saveFile2("profiles.csv");
+
+        if (saveFile2.is_open())
+        {
+            for (long unsigned int i = 0; i < profiles.size() - 1; i++)
+            {
+            }
         }
+        else
+        {
+            cout << "Error with file" << endl;
+        }
+        saveFile2.close();
+    }
 };
