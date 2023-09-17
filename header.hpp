@@ -164,6 +164,7 @@ public:
                 system("clear");
                 cout << "Selected Exit Game" << endl;
                 exit = true;
+                exitSave();
                 break;
             }
         }
@@ -655,8 +656,24 @@ private:
         }
     }
 
-    void exit()
+    void exitSave()
     {
-    
-    }
+        node<T1, T2> *pCurrent = pHead;
+        ofstream saveFile("comList.csv");
+        if(saveFile.is_open())
+        {
+            while(pCurrent->getNext()->getNext() != NULL)
+            {
+            saveFile << pCurrent->getCom() << "," << pCurrent->getDesc() << endl;
+            pCurrent = pCurrent->getNext();
+            }
+            saveFile << pCurrent->getCom() << "," << pCurrent->getDesc();
+        }
+        else
+        {
+            cout << "Error with file" << endl;
+        }
+        saveFile.close();
+
+        }
 };
