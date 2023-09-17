@@ -20,3 +20,9 @@ build/pa1
 7) git tag "Name (version)" -m "message"    : git tag V0.2 -m "pre template"
 8) git push origin main --tags      : make sure no changes are done before pushing it
 9) git tag      :views all the tags that have been created locally
+
+10) git brach   : shows the branches with current branch in *
+11) git checkout branchName : switch to an already created branch
+12) git checkout -b branchName  : will create a new branch
+
+13) mv currentName newName  :copy the current file to a new name file and delete current file   

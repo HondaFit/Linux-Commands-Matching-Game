@@ -145,7 +145,7 @@ public:
             case 3:
                 system("clear"); // done
                 cout << "Selected Load Previous Game" << endl;
-                selectProfile();
+                selectProfile2();
                 break;
 
             case 4:
@@ -380,9 +380,16 @@ private:
         cout << "Type in a Username to either load or create a new one: ";
         cin >> username;
 
-        for (int i = 0; i < profileNames.size() - 1;i++)
+        for (long unsigned int i = 0; i < profileNames.size() ;i++)
         {
-            
+            if(username == profileNames[i])
+            {
+                cout << "Username Found" << endl;
+            }
+            else
+            {
+                cout << "Username Not found" << endl;
+            }
         }
     }
 
