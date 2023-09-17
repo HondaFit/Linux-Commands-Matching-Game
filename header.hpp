@@ -344,7 +344,7 @@ private:
             int profileIndex = profiles.size(); // shows how many players are there
             for (int i = 1; i <= profileIndex; i++)
             {
-                cout << "Player " << i << "    Score: " << profiles[i - 1] << endl;
+                cout << i << ") " << profileNames[i - 1] << "    Score: " << profiles[i - 1] << endl;
             }
 
             cout << "Select a Player by their Number: ";
@@ -372,6 +372,18 @@ private:
         }
         currentProfile = stoi(userInput);
         system("clear");
+    }
+    
+    void selectProfile2()
+    {
+        string username;
+        cout << "Type in a Username to either load or create a new one: ";
+        cin >> username;
+
+        for (int i = 0; i < profileNames.size() - 1;i++)
+        {
+            
+        }
     }
 
     void addCommand()
@@ -615,7 +627,7 @@ private:
 
         while (exit == false)
         {
-            cout << "Current Points for Player " << profileNames[currentProfile - 1] << ": " << profiles[currentProfile - 1] << endl;
+            cout << "Current Points for Player " << profileNames[currentProfile - 1] << ": " << profiles[currentProfile - 1] <<"\n"<< endl;
             cout << "Problem: What is the Description that best fits the Command: " << correctCommand << endl;
             problemPrinter();
             cout << "5) Exit to Menu" << endl;
