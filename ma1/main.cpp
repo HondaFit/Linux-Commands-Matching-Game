@@ -9,7 +9,17 @@ int main()
 
     sizeQueueCheck();
 
-    
+    fullQueueCheck();
+
+    emptyEnqueueCheck();
+    fullEnqueueCheck();
+
+    emptyDequeueCheck();
+    fullDequeueCheck();
+
+    emptyPeekCheck();
+    fullPeekCheck();
+
     return 0;
 }
 
