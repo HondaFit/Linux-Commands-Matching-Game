@@ -178,7 +178,10 @@ public:
         char dummy;
 
         int selection;
-        while (profiles[currentProfile - 1] <= 30 && exit == false)
+        selectProfile2();
+        int problemCnt = problemCount();
+
+        while (profiles[currentProfile - 1] <= problemCnt && exit == false)
         {
             randCommand = generateRandomNumber(totalCount);
             // cout << randCommand << endl;
@@ -202,6 +205,14 @@ public:
                 cout << "\nIncorrect, You got the Answer Wrong. Minus 1 Point" << endl;
                 profiles[currentProfile - 1]--;
             }
+            cout << "Press any key to continue" << endl;
+            cin >> dummy;
+            system("clear");
+        }
+
+        if (profiles[currentProfile - 1] >= problemCnt)
+        {
+            cout << "Congrats You Won!!!" << endl;
             cout << "Press any key to continue" << endl;
             cin >> dummy;
             system("clear");
@@ -267,7 +278,6 @@ private:
         }
         playerFile.close();
     }
-
     void loadProfiles2()
     {
         string name;
@@ -315,6 +325,35 @@ private:
             }
         }
         return stoi(choice);
+    }
+   
+    int problemCount()
+    {
+
+        string userInput;
+        int exit = false;
+        char dummy;
+
+        while (exit == false)
+        {
+
+            cout << "How many problems do you want to be tested on? ";
+            cin >> userInput;
+            cout << endl;
+
+            if (digitChecker(userInput) == true)
+            {
+                exit = true;
+                return stoi(userInput);
+            }
+            else
+            {
+                cout << "\nInvalid Selection, Press any key to continue ";
+                cin >> dummy;
+                system("clear");
+            }
+        }
+        return 30;
     }
 
     void displayRules()
@@ -373,46 +412,44 @@ private:
         currentProfile = stoi(userInput);
         system("clear");
     }
-    
     void selectProfile2()
     {
         string username;
 
         for (long unsigned int i = 1; i <= profiles.size(); i++)
-            {
-                cout << i << ") " << profileNames[i - 1] << "    Score: " << profiles[i - 1] << endl;
-            }
+        {
+            cout << i << ") " << profileNames[i - 1] << "    Score: " << profiles[i - 1] << endl;
+        }
 
         cout << "Type in a Username to either load or create a new one: ";
         cin >> username;
         bool found = false;
         int where;
 
-        for (long unsigned int i = 0; i < profileNames.size() ;i++)
+        for (long unsigned int i = 0; i < profileNames.size(); i++)
         {
-            if(username == profileNames[i])
+            if (username == profileNames[i])
             {
-                //cout << "User Found" << endl;
+                // cout << "User Found" << endl;
                 where = i;
                 found = true;
             }
             else
             {
-               // cout << "User Not found," << endl;
-
+                // cout << "User Not found," << endl;
             }
         }
-        if(found == true)
+        if (found == true)
         {
             cout << "\nUser Found. Found at line " << ++where << endl;
             currentProfile = where++;
         }
         else
         {
-                cout << "\nUser not Found. New user will be created" << endl;
-                 profileNames.push_back(username);
-                 profiles.push_back(0);
-                 currentProfile = profiles.size();
+            cout << "\nUser not Found. New user will be created" << endl;
+            profileNames.push_back(username);
+            profiles.push_back(0);
+            currentProfile = profiles.size();
         }
         char dummy;
         cout << "Press any key to continue" << endl;
@@ -594,7 +631,6 @@ private:
 
         // cout << pCurrent->getCom() << endl;
     }
-
     string descFinder(int desc)
     {
 
@@ -661,7 +697,8 @@ private:
 
         while (exit == false)
         {
-            cout << "Current Points for Player " << profileNames[currentProfile - 1] << ": " << profiles[currentProfile - 1] <<"\n"<< endl;
+            cout << "Current Points for Player " << profileNames[currentProfile - 1] << ": " << profiles[currentProfile - 1] << "\n"
+                 << endl;
             cout << "Problem: What is the Description that best fits the Command: " << correctCommand << endl;
             problemPrinter();
             cout << "5) Exit to Menu" << endl;
@@ -745,7 +782,7 @@ private:
 
         if (saveFile2.is_open())
         {
-            for (long unsigned int i = 0; i < profiles.size()-1; i++)
+            for (long unsigned int i = 0; i < profiles.size() - 1; i++)
             {
                 saveFile2 << profileNames[i] << "," << profiles[i] << endl;
             }
