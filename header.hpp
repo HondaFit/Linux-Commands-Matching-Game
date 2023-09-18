@@ -404,16 +404,20 @@ private:
         }
         if(found == true)
         {
-            cout << "User Found. Found at line " << ++where << endl;
+            cout << "\nUser Found. Found at line " << ++where << endl;
             currentProfile = where++;
         }
         else
         {
-                cout << "User not Found. New user will be created" << endl;
+                cout << "\nUser not Found. New user will be created" << endl;
                  profileNames.push_back(username);
                  profiles.push_back(0);
                  currentProfile = profiles.size();
         }
+        char dummy;
+        cout << "Press any key to continue" << endl;
+        cin >> dummy;
+        system("clear");
     }
 
     void addCommand()
@@ -724,7 +728,7 @@ private:
         ofstream saveFile("comList.csv");
         if (saveFile.is_open())
         {
-            while (pCurrent->getNext()->getNext() != NULL)
+            while (pCurrent->getNext() != NULL)
             {
                 saveFile << pCurrent->getCom() << "," << pCurrent->getDesc() << endl;
                 pCurrent = pCurrent->getNext();

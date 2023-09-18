@@ -1,3 +1,4 @@
+pwd,print working directory
 ls,list files and directories
 cd,change directory
 mkdir,create a new directory
@@ -26,3 +27,4 @@ exit,close the terminal session
 clear,clear the terminal screen
 find,search for files and directories
 finger,display user information
+free,display memory usage
