@@ -16,7 +16,7 @@
 
           "--build",
 
-          "${workspaceFolder}/build" // Adjust the path if necessary
+          "${workspaceFolder}/ma1/build" // Adjust the path if necessary
 
         ],
 

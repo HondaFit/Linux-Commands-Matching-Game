@@ -8,13 +8,13 @@
 
       {
 
-        "name": "Debug PA1",
+        "name": "Debug MA1",
 
         "type": "cppdbg",
 
         "request": "launch",
 
-        "program": "${workspaceFolder}/build/pa1", // Path to your executable
+        "program": "${workspaceFolder}/ma1/build/ma1", // Path to your executable
 
         "args": [],
 
