@@ -44,7 +44,7 @@ Precondition: queue object is empty
 Postcondition: queue object queue size is 
 Expected result: queue size is 5;
 Actual result: 6
-Status: 
+Status:
 */
 void sizeQueueCheck()
 {
