@@ -7,6 +7,9 @@ int main()
 
     emptyQueueCheck();
 
+    sizeQueueCheck();
+
+    
     return 0;
 }
 
