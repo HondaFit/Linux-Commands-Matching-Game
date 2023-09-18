@@ -1,5 +1,8 @@
 # Linux-Commands-Matching-Game
 
+I'm Unable to invite https://github.com/chibuikeugwu & https://github.com/abirwsu because their names won't show in the search bar. 
+
+
 ----------------- How to Build -----------------
 1) “mkdir build”        :Create a new directory “build” in the working directory
 2) "cmake –S . –B build" :-S: the path to the source files “.” represents the current directory, which is ~/CPTS-223-Examples/cmake-example -B: the path to build the project, in which we can find the executable files Here we set the newly created directory “build” as this build path
@@ -24,4 +27,5 @@ build/pa1
 11) git checkout branchName : switch to an already created branch
 12) git checkout -b branchName  : will create a new branch
 
-13) mv currentName newName  :copy the current file to a new name file and delete current file   
+13) mv currentName newName  :copy the current file to a new name file and delete current file
+
