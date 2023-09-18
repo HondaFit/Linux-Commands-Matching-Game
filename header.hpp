@@ -377,19 +377,42 @@ private:
     void selectProfile2()
     {
         string username;
+
+        for (long unsigned int i = 1; i <= profiles.size(); i++)
+            {
+                cout << i << ") " << profileNames[i - 1] << "    Score: " << profiles[i - 1] << endl;
+            }
+
         cout << "Type in a Username to either load or create a new one: ";
         cin >> username;
+        bool found = false;
+        int where;
 
         for (long unsigned int i = 0; i < profileNames.size() ;i++)
         {
             if(username == profileNames[i])
             {
-                cout << "Username Found" << endl;
+                //cout << "User Found" << endl;
+                where = i;
+                found = true;
             }
             else
             {
-                cout << "Username Not found" << endl;
+               // cout << "User Not found," << endl;
+
             }
+        }
+        if(found == true)
+        {
+            cout << "User Found. Found at line " << ++where << endl;
+            currentProfile = where++;
+        }
+        else
+        {
+                cout << "User not Found. New user will be created" << endl;
+                 profileNames.push_back(username);
+                 profiles.push_back(0);
+                 currentProfile = profiles.size();
         }
     }
 
@@ -718,9 +741,11 @@ private:
 
         if (saveFile2.is_open())
         {
-            for (long unsigned int i = 0; i < profiles.size() - 1; i++)
+            for (long unsigned int i = 0; i < profiles.size()-1; i++)
             {
+                saveFile2 << profileNames[i] << "," << profiles[i] << endl;
             }
+            saveFile2 << profileNames[profiles.size() - 1] << "," << profiles[profiles.size() - 1];
         }
         else
         {
