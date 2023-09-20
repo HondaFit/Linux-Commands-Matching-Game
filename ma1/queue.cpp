@@ -7,7 +7,7 @@ queue::queue(int size)
     arr = new int[size];
     capacity = size;
     front = 0;
-    rear = -1;
+    rear = -1; // previously this was -1 which caused an arithmetic error
     count = 0;
 }
 
@@ -30,7 +30,7 @@ void queue::dequeue()
 
     cout << "Removing " << arr[front] << '\n';
 
-    front = (front + 1) % capacity;
+    front = (front + 1); // % capacity;
     count--;
 }
 
@@ -46,8 +46,8 @@ void queue::enqueue(int item)
 
     cout << "Inserting " << item << '\n';
 
-    rear = (rear + 1) % capacity;
-    arr[rear] = size();
+    rear = (rear + 1); // % capacity;
+    arr[rear] = item; // it use to be size() which is wrong
     count++;
 }
 
@@ -59,13 +59,13 @@ int queue::peek()
         cout << "UnderFlow\nProgram Terminated\n";
         return numeric_limits<int>::min();
     }
-    return arr[rear];
+    return arr[front]; //it was arr[rear] which returns the last enqueued data. This is wrong
 }
 
 // Utility function to return the size of the queue
 int queue::size()
 {
-    return count + 1;
+    return count;
 }
 
 // Utility function to check if the queue is empty or not
@@ -77,6 +77,6 @@ bool queue::isEmpty()
 // Utility function to check if the queue is full or not
 bool queue::isFull()
 {
-    return (size()-1 == capacity);
+    return (size() == capacity);
 }
 

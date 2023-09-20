@@ -18,7 +18,7 @@ Status:
 */
 void emptyQueueCheck()
 {
-    queue q1;
+    queue q1(0);
 
     if (q1.isEmpty())
     {
@@ -48,8 +48,8 @@ Status:
 void sizeQueueCheck()
 {
 
-    queue q1;
-    for (int i = 0; i < 5; i++)
+    queue q1(5);
+    for (int i = 1; !q1.isFull();i++)
     {
         q1.enqueue(i);
     }
@@ -79,7 +79,7 @@ Status:
 */
 void fullQueueCheck()
 {
-    queue q1;
+    queue q1(5);
     int count = 1;
 
     while (!q1.isFull())
@@ -90,7 +90,7 @@ void fullQueueCheck()
 
     if (q1.isFull())
     {
-        cout << "Max Size is " << count << "  isFull() Passed" << endl;
+        cout << "Max Size is " << count - 1 << "  isFull() Passed" << endl;
     }
 }
 
@@ -110,7 +110,7 @@ Status:
 */
 void emptyEnqueueCheck()
 {
-    queue q1;
+    queue q1(5);
 
     q1.enqueue(1);
 
@@ -141,16 +141,16 @@ Actual result:
 
 void fullEnqueueCheck()
 {
-    queue q1;
+    queue q1(5);
 
-    while (!q1.isFull())
+    for (int i = 1; !q1.isFull();i++)
     {
-        q1.enqueue(10);
+        q1.enqueue(i);
     }
 
     if (q1.isFull())
     {
-        cout << "queue full anything after means enqueue() failed. If nothing is enqueued after, enqueue() passed" << endl;
+        cout << "Queue is Full - If overflow program terminated, Enqueue() when Full Pass. If not Enqueue() Fail" << endl;
     }
     q1.enqueue(1);
 }
@@ -170,11 +170,11 @@ Actual result:
 */
 void emptyDequeueCheck()
 {
-    queue q1;
+    queue q1(5);
 
     if (q1.isEmpty())
     {
-        cout << "Queue is Empty() if Dequeue underflowed, Dequeue() Passed, if not Dequeue Faied" << endl;
+        cout << "Queue is Empty - If underflow program terminated, Dequeue() when Empty Pass. If not Dequeue() Fail" << endl;
         q1.dequeue();
     }
     else
@@ -187,76 +187,84 @@ void emptyDequeueCheck()
         q1.dequeue();
     }
 }
-    /* Test ID: Non-Empty Dequeue Check - EDC
-    Unit: queue::dequeue()
-    Description: test to determine if queue::dequeue works when queue is non-empty
-    Test steps:
-    1. Construct an non empty queue object
-    2. Invoke queue::dequeue
-    3. Evaluate if dequeued succsussfully or failed
-    Test data: empty queue
-    Precondition: queue object is empty
-    Postcondition: queue object has nothing to be deqeueud
-    Expected result: dequeued failed; print overflow succuss
-    Actual result: emptied queue
-    */
+/* Test ID: Non-Empty Dequeue Check - EDC
+Unit: queue::dequeue()
+Description: test to determine if queue::dequeue works when queue is non-empty
+Test steps:
+1. Construct an non empty queue object
+2. Invoke queue::dequeue
+3. Evaluate if dequeued succsussfully or failed
+Test data: empty queue
+Precondition: queue object is empty
+Postcondition: queue object has nothing to be deqeueud
+Expected result: dequeued failed; print overflow succuss
+Actual result: emptied queue
+*/
 
-    void fullDequeueCheck()
+void fullDequeueCheck()
+{
+    queue q1(5);
+
+    for (int i = 1; !q1.isFull();i++)
     {
-        queue q1;
-
-        while (!q1.isFull())
-        {
-            q1.enqueue(10);
-        }
-        while (!q1.isEmpty())
-        {
-            q1.dequeue();
-        }
-
-        if (q1.isEmpty())
-        {
-            cout << "Dequeue is Succsussfull"<<endl;
-        }
-        else
-        {
-            cout << "Dequeue is Unsuccsussfull" << endl;
-        }
+        q1.enqueue(i);
     }
-
-       /* Test ID: Empty Peek Check - EPC
-    Unit: queue::peek()
-    Description: test to determine if queue::peek works when queue is empty
-    Test steps:
-    1. Construct empty  queue object
-    2. Invoke queue::peek
-    3. Evaluate if peek succsussfully or failed
-    Test data: empty queue
-    Precondition: queue object is empty
-    Postcondition: queue object has nothing to be peeked
-    Expected result: dequeued failed; print overflow succuss
-    Actual result:
-    */ 
-
-   void emptyPeekCheck()
-   {
-       queue q1;
-
-    while(!q1.isEmpty())
+    while (!q1.isEmpty())
     {
         q1.dequeue();
     }
 
-    cout << "If peek returns any value, then Peak() has failed. If not then Peek is succussful" << endl;
+    if (q1.isEmpty())
+    {
+        cout << "Dequeue() is Succsussfull" << endl;
+    }
+    else
+    {
+        cout << "Dequeue() is Unsuccsussfull" << endl;
+    }
+}
+
+/* Test ID: Empty Peek Check - EPC
+Unit: queue::peek()
+Description: test to determine if queue::peek works when queue is empty
+Test steps:
+1. Construct empty  queue object
+2. Invoke queue::peek
+3. Evaluate if peek succsussfully or failed
+Test data: empty queue
+Precondition: queue object is empty
+Postcondition: queue object has nothing to be peeked
+Expected result: dequeued failed; print overflow succuss
+Actual result:
+*/
+
+void emptyPeekCheck()
+{
+    queue q1(5);
+
+    if (q1.isEmpty())
+    {
+        cout << "Queue is Empty - If underflow program terminated some number, Peek() when empty Pass if not Peek() Fail" << endl;
+    }
+    else
+    {
+        while (!q1.isEmpty())
+        {
+            q1.dequeue();
+        }
+    }
+
     cout << q1.peek() << endl;
-   }
+}
 
 void fullPeekCheck()
 {
-    queue q1;
+    queue q1(5);
 
-    q1.enqueue(10);
-
-    cout << "If peek returns a value, then Peak() is succussfull, if not then Peak() failed" << endl;
-    cout<<"Peak: "<< q1.peek()<< endl;
+    for (int i = 1; !q1.isFull();i++)
+    {
+        q1.enqueue(i);
+    }
+    cout << "Queue is full - If first value enqueued, Peek() when full Pass if not Peek() Fail " << endl;
+    cout << "Peak: " << q1.peek() << endl;
 }
