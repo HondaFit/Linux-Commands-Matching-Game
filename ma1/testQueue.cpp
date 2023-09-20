@@ -234,7 +234,7 @@ Test steps:
 Test data: empty queue
 Precondition: queue object is empty
 Postcondition: queue object has nothing to be peeked
-Expected result: dequeued failed; print overflow succuss
+Expected result: peek failed; print overflow succuss
 Actual result:
 */
 
@@ -257,6 +257,21 @@ void emptyPeekCheck()
     cout << q1.peek() << endl;
 }
 
+
+
+/* Test ID: Full Peek Check - EPC
+Unit: queue::peek()
+Description: test to determine if queue::peek works when queue is empty
+Test steps:
+1. Construct empty  queue object
+2. Invoke queue::peek
+3. Evaluate if peek succsussfully or failed
+Test data: empty queue
+Precondition: queue object is empty
+Postcondition: queue object has nothing to be peeked
+Expected result: peek failed; print overflow succuss
+Actual result:
+*/
 void fullPeekCheck()
 {
     queue q1(5);
