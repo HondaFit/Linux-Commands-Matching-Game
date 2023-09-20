@@ -9,7 +9,9 @@ I'm Unable to invite https://github.com/chibuikeugwu & https://github.com/abirws
 3) "cmake --buid build"  :“--build”: the command for building this project according to the configuration in CMakeLists.txt The second “build” is the newly created directory build
 
 ----------------- How to Run -----------------
+
 build/pa1
+
 ----------------- Need to Know Commands -----------------
 
 1) rm -fdr "folder name"    : removes forcefully the folder and all the contents within it (recursivly)
@@ -28,3 +30,21 @@ build/pa1
 12) git checkout -b branchName  : will create a new branch
 
 13) mv currentName newName  :copy the current file to a new name file and delete current file
+
+
+----------------- How to Build and Run PA1 -----------------
+1) Once you git clone https://github.com/HondaFit/Linux-Commands-Matching-Game.git
+2) go to the directory where you installed it 
+3) cmake –S . –B build
+4) cmake --buid build
+5) build/pa1
+
+
+
+----------------- How to Build and Run MA1 -----------------
+1) Once you git clone https://github.com/HondaFit/Linux-Commands-Matching-Game.git
+2) go to the directory where you installed it 
+3) go to the ma1 branch
+4) cmake –S . –B build
+5) cmake --buid build
+6) build/ma1
