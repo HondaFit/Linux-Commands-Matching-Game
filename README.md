@@ -28,4 +28,3 @@ build/pa1
 12) git checkout -b branchName  : will create a new branch
 
 13) mv currentName newName  :copy the current file to a new name file and delete current file
-
