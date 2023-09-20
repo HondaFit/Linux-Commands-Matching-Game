@@ -1,6 +1,5 @@
 #include "node.hpp"
 
-
 template <typename T1, typename T2>
 class list
 {
@@ -95,9 +94,9 @@ public:
 
         int selection;
         selectProfile2();
-        int problemCnt = problemCount();
+        problemLeft = problemCount();
 
-        while (profiles[currentProfile - 1] <= problemCnt && exit == false)
+        while (profiles[currentProfile - 1] <= 30 && exit == false && problemLeft > 0)
         {
             randCommand = generateRandomNumber(totalCount);
             // cout << randCommand << endl;
@@ -121,17 +120,29 @@ public:
                 cout << "\nIncorrect, You got the Answer Wrong. Minus 1 Point" << endl;
                 profiles[currentProfile - 1]--;
             }
+
+             --problemLeft;
+
             cout << "Press any key to continue" << endl;
             cin >> dummy;
             system("clear");
         }
 
-        if (profiles[currentProfile - 1] >= problemCnt)
+        if (profiles[currentProfile - 1] >= 30)
         {
             cout << "Congrats You Won!!!" << endl;
             cout << "Press any key to continue" << endl;
             cin >> dummy;
             system("clear");
+
+        }
+        else
+        {
+            cout << "Game exited either by leaving game or out of problems left" << endl;
+            cout << "Press any key to continue" << endl;
+            cin >> dummy;
+            system("clear");
+
         }
     }
 
@@ -144,6 +155,8 @@ private:
     ifstream listFile;
     ifstream playerFile;
     ifstream ruleFile;
+
+    int problemLeft; 
 
     vector<string> profileNames;
     vector<int> profiles;
@@ -242,7 +255,7 @@ private:
         }
         return stoi(choice);
     }
-   
+
     int problemCount()
     {
 
@@ -614,8 +627,8 @@ private:
         while (exit == false)
         {
             cout << "Current Points for Player " << profileNames[currentProfile - 1] << ": " << profiles[currentProfile - 1] << "\n"
-                 << endl;
-            cout << "Problem: What is the Description that best fits the Command: " << correctCommand << endl;
+                 << "Problems Left: " << problemLeft << endl;
+            cout << "\nProblem: What is the Description that best fits the Command: " << correctCommand << endl;
             problemPrinter();
             cout << "5) Exit to Menu" << endl;
             cout << "\nSelect your Description ";
