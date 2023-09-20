@@ -628,9 +628,9 @@ private:
         {
             cout << "Current Points for Player " << profileNames[currentProfile - 1] << ": " << profiles[currentProfile - 1] << "\n"
                  << "Problems Left: " << problemLeft << endl;
-            cout << "\nProblem: What is the Description that best fits the Command: " << correctCommand << endl;
+            cout << "\nProblem: What is the Description that best fits the Command: " << correctCommand <<"\n"<< endl;
             problemPrinter();
-            cout << "5) Exit to Menu" << endl;
+            cout << "\n5) Exit to Menu" << endl;
             cout << "\nSelect your Description ";
             cin >> userInput;
 

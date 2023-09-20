@@ -2,6 +2,7 @@
 
 I'm Unable to invite https://github.com/chibuikeugwu & https://github.com/abirwsu because their names won't show in the search bar. 
 
+NOTE!! THIS BRANCH DOES NOT CONTAIN MA1, PLEASE WITCH TO THE MA1 BRANCH
 
 ----------------- How to Build -----------------
 1) “mkdir build”        :Create a new directory “build” in the working directory
